@@ -1,0 +1,21 @@
+
+note over browser:
+user enters text in text field 
+and Clicks Submit button
+
+JS file calls redrawNotes to redraw SPA for notes
+end note over 
+
+browser->server: HTTP POST https://studies.cs.helsinki.fi/exampleapp/new_note_spa
+
+note over server:
+Server receives user entered value in req.body and
+adds it to Notes by calling createNote if its valid Note.
+Send message : {"message":"note created"} if note is created 
+Else
+Send message : {invalid note} status 400
+end note 
+
+server->browser: Response Status: 201 {"message":"note created"}  or Status: 400 {"invalid note"}
+
+
