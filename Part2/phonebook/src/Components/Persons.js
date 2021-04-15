@@ -1,10 +1,12 @@
-const Persons = (props) => {
+import PersonDetails from './PersonDetails'
+const Persons = ({searchedResults, deletePersonHandler}) => {
     return(
         <div>
             <ul>
                 {
-                    props.searchedResults.map(person => 
-                    <li key={person.name}>{person.name}  {person.number}</li>)  
+                    searchedResults.map(person =>  
+                        <PersonDetails key={person.name} person={person} deletePersonHandler={deletePersonHandler}/>                    
+                    )  
                 }
             </ul> 
         </div>
