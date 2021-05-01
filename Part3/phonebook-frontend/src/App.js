@@ -8,7 +8,7 @@ import PersonService from './services/PersonService'
 import Notification from './Components/Notification'
 
 const App = () => {
-  const [ persons, setPersons] = useState([])
+  const [persons, setPersons] = useState([])
   const [message, setMessage] = useState({ content: null})
 
   const showNotification = (content, color) => {
@@ -56,8 +56,8 @@ const App = () => {
 
     const person = {
       name : newName,
-      number : newNumber,
-      id : shortid.generate()
+      number : newNumber//,
+      //id : shortid.generate()
     }
 
     const existingPerson = persons.filter((personFilter) => 
@@ -79,7 +79,7 @@ const App = () => {
         showNotification(`Updated person ${returnPerson.name}`,'#008000')
         })
         .catch(() => {
-          showNotification(`${existingPerson[0].name} already deleted`,'#3ff0000')
+          showNotification(`Error to update - ${existingPerson[0].name}`,'#3ff0000')
           setPersons(
             persons.filter((person) => person.id !== existingPerson[0].id)
           )
@@ -87,11 +87,15 @@ const App = () => {
       }
     }
     else{
-      PersonService.create(person)
-      setPersons(persons.concat(person))
-      showNotification(`Created Person ${person.name}`,'#008000')
-      setNewName('')
-      setNewNumber('')
+      PersonService
+      .create(person)
+      .then((createdPerson) => {
+        setPersons(persons.concat(createdPerson))
+        showNotification(`Created Person ${person.name}`,'#008000')
+        setNewName('')
+        setNewNumber('')
+      })
+      .catch((error) => showNotification(error))
     }
   }
 
