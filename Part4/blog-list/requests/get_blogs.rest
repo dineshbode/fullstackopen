@@ -1,0 +1,14 @@
+GET http://localhost:3003/api/blogs
+
+###
+
+POST http://localhost:3003/api/blogs HTTP/1.1
+Content-Type: application/json
+
+{
+    "title": "Rich Dad Poor Dad",
+    "author": "Robert T. Kiyosaki",
+    "url": "www.google.com/Learn_JS_PDF",
+    "likes": 10
+}
+
